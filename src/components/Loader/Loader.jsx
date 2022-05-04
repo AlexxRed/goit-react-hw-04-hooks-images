@@ -2,7 +2,6 @@
 import {Watch} from 'react-loader-spinner'
 
 export const Loader = () => {
-    // return <LoadingText>loading...</LoadingText>
     return (
         <Watch
         color="#48ff00"
@@ -12,3 +11,5 @@ export const Loader = () => {
         />
     )
 }
+
+    // return <LoadingText>loading...</LoadingText>

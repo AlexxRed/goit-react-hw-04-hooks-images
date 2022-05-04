@@ -20,7 +20,7 @@ export function App() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [bigImage, setBigImage] = useState([]);
+  const [bigImage, setBigImage] = useState('');
 
   const onSubmit = searchQuery => {
     setSearchQuery(searchQuery)
@@ -91,9 +91,8 @@ export function App() {
         { isLoading &&
           images.length  &&
           <Loader />
-        }
-
-        {/* totalHits !== sumImages && */}
+      }
+      
         { 
           images.length > 0 &&
           isLoading === false &&

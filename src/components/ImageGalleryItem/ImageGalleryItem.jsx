@@ -10,8 +10,8 @@ export const ImageGalleryItem = ({ smallImg, tags, showImage, id }) => {
 }
 
 ImageGalleryItem.propTypes = {
-  smallImg: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  showImage: PropTypes.func.isRequired,
+    smallImg: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    showImage: PropTypes.func.isRequired,
 };
