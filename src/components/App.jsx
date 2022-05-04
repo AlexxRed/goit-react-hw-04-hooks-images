@@ -34,13 +34,14 @@ export function App() {
       return
     }
     
-    try {
-      setIsLoading(true);
-      
-      getImages(searchQuery, page).then(r => {
-        const customImagesData = mapper(r.data.hits);
-
-        if (r.data.hits.length === 0) {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        
+        const responseImages = await getImages(searchQuery, page)
+        const customImagesData = mapper(responseImages.data.hits);
+        
+        if (customImagesData.length === 0) {
           setIsLoading(false);
           Notify.info('we do not have this images');
           return;
@@ -48,13 +49,14 @@ export function App() {
         
         setImages([...images, ...customImagesData]);
         setIsLoading(false);
-      })
-    } catch (error) {
-      setIsLoading(false);
-      Notify.failure(`${error}`);
-    };
-      
 
+      } catch (error) {
+        setIsLoading(false);
+        Notify.failure(`${error}`);
+      };
+    }
+    fetchData();
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, page]);
   
