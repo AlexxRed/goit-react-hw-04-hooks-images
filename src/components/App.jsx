@@ -7,7 +7,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Modal } from "./Modal/Modal";
 
 import { mapper } from "services/mapper";
-import {infoStyle} from "services/userInformator"
+import { infoStyle } from "services/userInformator"
 import { getImages } from "api/getImages";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 infoStyle()
@@ -38,9 +38,9 @@ export function App() {
       try {
         setIsLoading(true);
         
-        const responseImages = await getImages(searchQuery, page)
+        const responseImages = await getImages(searchQuery, page);
         const customImagesData = mapper(responseImages.data.hits);
-        
+
         if (customImagesData.length === 0) {
           setIsLoading(false);
           Notify.info('we do not have this images');
@@ -73,7 +73,7 @@ export function App() {
     images.filter(image => {
       if (image.id === id) {
         toggleModal();
-        setBigImage(image);
+        return setBigImage(image);
       }
       return image
     })
