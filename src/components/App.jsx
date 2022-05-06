@@ -69,14 +69,20 @@ export function App() {
     setShowModal(prevState => !prevState);
   };
 
+  // const showImage = (id) => {
+  //   images.filter(image => {
+  //     if (image.id === id) {
+  //       toggleModal();
+  //       return setBigImage(image);
+  //     }
+  //     return image
+  //   })
+  // };
+
   const showImage = (id) => {
-    images.filter(image => {
-      if (image.id === id) {
-        toggleModal();
-        return setBigImage(image);
-      }
-      return image
-    })
+    const showPhoto = images.find(image => image.id === id)
+    toggleModal();
+    return setBigImage(showPhoto);
   };
 
   return (
