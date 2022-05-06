@@ -69,7 +69,13 @@ export function App() {
     setShowModal(prevState => !prevState);
   };
 
-  // const showImage = (id) => {
+  const showImage = (id) => {
+    const showPhoto = images.find(image => image.id === id)
+    toggleModal();
+    return setBigImage(showPhoto);
+  };
+
+    // const showImage = (id) => {
   //   images.filter(image => {
   //     if (image.id === id) {
   //       toggleModal();
@@ -79,11 +85,11 @@ export function App() {
   //   })
   // };
 
-  const showImage = (id) => {
-    const showPhoto = images.find(image => image.id === id)
-    toggleModal();
-    return setBigImage(showPhoto);
-  };
+  // const showImage = (id) => {
+  //   const showPhoto = images.filter(image => image.id === id)
+  //   toggleModal();
+  //   setBigImage(showPhoto);
+  // };
 
   return (
       <Section>
