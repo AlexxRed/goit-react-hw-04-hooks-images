@@ -19,11 +19,11 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [bigImage, setBigImage] = useState('');
+    // const [showModal, setShowModal] = useState(false);
 
   const onSubmit = searchQuery => {
-    setSearchQuery(searchQuery)
+    setSearchQuery(searchQuery);
     setImages([]);
     setIsLoading(false);
     setPage(1);
@@ -31,7 +31,7 @@ export function App() {
 
   useEffect(() => {
     if (!searchQuery) {
-      return
+      return;
     }
     
     const fetchData = async () => {
@@ -47,17 +47,16 @@ export function App() {
           return;
         };
         
-        setImages([...images, ...customImagesData]);
+        setImages(prevImages => [...prevImages, ...customImagesData]);
         setIsLoading(false);
 
       } catch (error) {
         setIsLoading(false);
         Notify.failure(`${error}`);
       };
-    }
+    };
+
     fetchData();
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, page]);
   
 
@@ -65,31 +64,15 @@ export function App() {
     setPage(page + 1);
   };
 
-  const toggleModal = () => {
-    setShowModal(prevState => !prevState);
+  const onModalClose = () => {
+    setBigImage('');
   };
 
   const showImage = (id) => {
-    const showPhoto = images.find(image => image.id === id)
-    toggleModal();
+    const showPhoto = images.find(image => image.id === id);
+    onModalClose();
     return setBigImage(showPhoto);
   };
-
-    // const showImage = (id) => {
-  //   images.filter(image => {
-  //     if (image.id === id) {
-  //       toggleModal();
-  //       return setBigImage(image);
-  //     }
-  //     return image
-  //   })
-  // };
-
-  // const showImage = (id) => {
-  //   const showPhoto = images.filter(image => image.id === id)
-  //   toggleModal();
-  //   setBigImage(showPhoto);
-  // };
 
   return (
       <Section>
@@ -102,19 +85,17 @@ export function App() {
           (<ImageGallery images={images} showImage={showImage} />))
         }
 
-        { isLoading &&
-          images.length  &&
-          <Loader />
-      }
+        {isLoading &&
+          <Loader />}
       
-        { 
+      
+        {!isLoading  &&
           images.length > 0 &&
-          isLoading === false &&
           (<LoadMoreButton loadMore={loadMore} />)
         }
 
-        {showModal && (
-          <Modal toggleModal={toggleModal} bigImage={bigImage} />
+        {bigImage && (
+          <Modal onModalClose={onModalClose} bigImage={bigImage} />
         )}
       </Section>
     );

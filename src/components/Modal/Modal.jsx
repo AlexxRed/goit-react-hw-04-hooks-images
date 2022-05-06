@@ -5,7 +5,7 @@ import { Overlay, ModalContainer, ModalImage } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = ({ toggleModal, bigImage }) => {
+export const Modal = ({ onModalClose, bigImage }) => {
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => {
@@ -15,13 +15,13 @@ export const Modal = ({ toggleModal, bigImage }) => {
     
     const handleKeyDown = e => {
         if (e.code === 'Escape') {
-            toggleModal();
+            onModalClose();
         };
     };
     
     const handleBackdropClick = e => {
         if (e.currentTarget === e.target) {
-            toggleModal();
+            onModalClose();
         };
     };
 
@@ -38,7 +38,7 @@ export const Modal = ({ toggleModal, bigImage }) => {
 }
 
 Modal.propTypes = {
-    toggleModal: PropTypes.func.isRequired,
+    onModalClose: PropTypes.func.isRequired,
     bigImage: PropTypes.shape({
     largeImageURL: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired,
