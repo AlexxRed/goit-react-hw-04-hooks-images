@@ -88,7 +88,6 @@ export function App() {
         {isLoading &&
           <Loader />}
       
-      
         {!isLoading  &&
           images.length > 0 &&
           (<LoadMoreButton loadMore={loadMore} />)

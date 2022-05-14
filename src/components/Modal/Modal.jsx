@@ -25,7 +25,7 @@ export const Modal = ({ onModalClose, bigImage }) => {
         };
     };
 
-    const {largeImageURL, tags} = bigImage
+    const {largeImageURL, tags} = bigImage;
 
     return createPortal(
     <Overlay onClick={handleBackdropClick}>
